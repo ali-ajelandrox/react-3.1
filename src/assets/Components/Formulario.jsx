@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { BaseColaboradores } from '../db/BaseColaboradores';
 
-function Formulario({ onAgregarColaborador }) {
+function Formulario({ onAgregarColaborador, busquedaActual }) {
   const [formData, setFormData] = useState({
     nombre: '',
     correo: '',
@@ -19,17 +18,11 @@ function Formulario({ onAgregarColaborador }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const nuevoColaborador = {
-      id: Math.floor(Math.random() * 1000).toString(), // Generar un ID único (puedes usar otra lógica si lo prefieres)
+      id: Math.floor(Math.random() * 1000).toString(),
       ...formData
     };
+    onAgregarColaborador(nuevoColaborador, busquedaActual);
 
-    // Agregar el nuevo colaborador a BaseColaboradores
-    BaseColaboradores.push(nuevoColaborador);
-
-    // Llamar a la función para notificar que se ha agregado un nuevo colaborador
-    onAgregarColaborador(nuevoColaborador);
-
-    // Limpiar el formulario
     setFormData({
       nombre: '',
       correo: '',

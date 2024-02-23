@@ -1,22 +1,25 @@
-    
 import React from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
 
-function Buscador() {
+function Buscador({ onBuscar }) {
+  const handleChange = (event) => {
+    const busqueda = event.target.value;
+    onBuscar(busqueda);
+  };
+
   return (
-    <>
-      <div className="col-md-4"> {/* Añadido para reducir a la mitad */}
-        <InputGroup className="mb-2">
-          <InputGroup.Text id="inputGroup-sizing-default">
-            Buscar
-          </InputGroup.Text>
-          <Form.Control
-            aria-label="Default"
-            aria-describedby="inputGroup-sizing-default"
-          />
-        </InputGroup>
-      </div>
-    </>
+    <div className="col-md-4">
+      <InputGroup className="mb-2">
+        <InputGroup.Text id="inputGroup-sizing-default">
+          Buscar
+        </InputGroup.Text>
+        <Form.Control
+          aria-label="Default"
+          aria-describedby="inputGroup-sizing-default"
+          onChange={handleChange}
+        />
+      </InputGroup>
+    </div>
   );
 }
 
